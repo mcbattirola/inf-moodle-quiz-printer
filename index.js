@@ -40,6 +40,7 @@ const init = async () => {
         height: args.screenHeight || defaultViewport.height,
         args: args.mobile ?? false
     }
+    
     await printer(args.username, args.password, args.url, viewport)
 }
 
