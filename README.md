@@ -2,6 +2,11 @@
 
 Automatically print the whole quiz on INF's Moodle.
 
+## Disclaimer
+
+Don't use this software to do stuff you're not supposed, like sharing quizes!
+This is developed to enable you to print your own quizes to have them later as images, saved on Drive or something.
+
 ## Setup
 
 Requirements: node and npm/yarn
