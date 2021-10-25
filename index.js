@@ -1,47 +1,46 @@
-const puppeteer = require('puppeteer');
+const printer = require('./printer')
+const { parseArgs, validateArgs, printHelp } = require('./args')
 
-(async () => {
-    try {
-        // open browser on page, will be redirected to login
-        const browser = await puppeteer.launch({headless: false});
-        const page = await browser.newPage();
-        page.setViewport({
-            width: 1280,
-            height: 1200,
-            isMobile: false,
-          });
-        await page.goto('https://moodle.inf.ufrgs.br/mod/quiz/attempt.php?attempt=152057&cmid=43778');
-    
-        // log in
-        await page.type("#username", "USERNAME")
-        await page.type("#password", "PASSWORD")
-        await page.click("#loginbtn")
-        
-        await page.waitForNetworkIdle()
-    
-        await printQuestions(page)
-        
-        await browser.close();
-        
-    } catch(err) {
-        console.log("error: ", err)
-    }
-  })();
+const defaultViewport = {
+    width: 1280,
+    height: 1200,
+    isMobile: false,
+}
 
-const printQuestions = async (page) => {
-    let currentQuestion = 0;
-    try {
-        while (true) {
-            // print current question
-            await page.screenshot({ path: `${currentQuestion + 1}.png` });
-            currentQuestion += 1
-            
-            // if find button to next question, click
-            await page.click(`a[data-quiz-page="${currentQuestion}"]`)
-
-            await page.waitForNetworkIdle()            
-        }
-    } catch (err) {
-        console.log("Print questions err:", err)
+const fields = {
+    required: {
+        username: '[string] Username to login on INF\'s moodle',
+        password: '[string] User\'s password',
+        url: '[string] URL to the quiz. IMPORTANT: you may need to use quotes (") around this parameter, since it includes & signs!'
+    },
+    optional: {
+        screenWidth: '[number] Browser screen width',
+        screenHeight: '[number] Browser screen height',
+        mobile: 'Show mobile version of website'
     }
 }
+
+const init = async () => {
+    const args = parseArgs(process.argv)
+
+    if(args.help) {
+        printHelp(fields)
+        return
+    }
+
+    try {
+        validateArgs(args, fields.required)
+    } catch(error) {
+        console.log("Error validating args:")
+        console.log(error.message)
+    }
+
+    const viewport = {
+        width: args.screenWidth || defaultViewport.width,
+        height: args.screenHeight || defaultViewport.height,
+        args: args.mobile ?? false
+    }
+    await printer(args.username, args.password, args.url, viewport)
+}
+
+init()
