@@ -41,9 +41,15 @@ Don't forget to use `"` on url if needed.
 ## TODO list
 
 [x] Read username, password and URL from params
+
 [x] Width and height as optional params
+
 [] Combine all images into one
+
 [] Print only quiz area, without sidebar, header and footer
+
 [] Output format as optional param
+
 [] Improve docs
+
 [] Test if it works for other Moodles
