@@ -11,12 +11,13 @@ const fields = {
     required: {
         username: '[string] Username to login on INF\'s moodle',
         password: '[string] User\'s password',
-        url: '[string] URL to the quiz. IMPORTANT: you may need to use quotes (") around this parameter, since it includes & signs!'
+        url: '[string] URL to the quiz. IMPORTANT: you may need to use quotes (") around this parameter, since it includes & signs!',
     },
     optional: {
         screenWidth: '[number] Browser screen width',
         screenHeight: '[number] Browser screen height',
-        mobile: 'Show mobile version of website'
+        mobile: 'Show mobile version of website',
+        start: '[number] Number of the question to start printing'
     }
 }
 
@@ -33,6 +34,7 @@ const init = async () => {
     } catch(error) {
         console.log("Error validating args:")
         console.log(error.message)
+        return 1
     }
 
     const viewport = {
@@ -40,8 +42,10 @@ const init = async () => {
         height: args.screenHeight || defaultViewport.height,
         args: args.mobile ?? false
     }
+
+    const startQuestion = args.start ? parseInt(args.start) : 1
     
-    await printer(args.username, args.password, args.url, viewport)
+    await printer(args.username, args.password, args.url, viewport, startQuestion)
 }
 
 init()

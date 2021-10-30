@@ -23,15 +23,16 @@ Then, run:
 node index.js help
 # outputs:
 
-#Required parameters:
-#username: [string] Username to login on INF's moodle
-#password: [string] User's password
-#url: [string] URL to the quiz. IMPORTANT: you may need to use quotes (") around this parameter, since it includes & signs!
+# Required parameters:
+# username: [string] Username to login on INF's moodle
+# password: [string] User's password
+# url: [string] URL to the quiz. IMPORTANT: you may need to use quotes (") around this parameter, since it includes & signs!
 
-#Optional parameters
-#screenWidth: [number] Browser screen width
-#screenHeight: [number] Browser screen height
-#mobile: Show mobile version of website
+# Optional parameters
+# screenWidth: [number] Browser screen width
+# screenHeight: [number] Browser screen height
+# mobile: Show mobile version of website
+# start: [number] Number of the question to start printing
 ```
 
 To run on a quiz, run:
@@ -48,6 +49,8 @@ Don't forget to use `"` on url if needed.
 [x] Read username, password and URL from params
 
 [x] Width and height as optional params
+
+[] Add option to select the final question to be printed
 
 [] Combine all images into one
 
