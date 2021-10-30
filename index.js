@@ -17,7 +17,8 @@ const fields = {
         screenWidth: '[number] Browser screen width',
         screenHeight: '[number] Browser screen height',
         mobile: 'Show mobile version of website',
-        start: '[number] Number of the question to start printing'
+        start: '[number] Number of the question to start printing',
+        output: '[string] Name for the output print screen. Defaults to "quiz.png"'
     }
 }
 
@@ -45,7 +46,7 @@ const init = async () => {
 
     const startQuestion = args.start ? parseInt(args.start) : 1
     
-    await printer(args.username, args.password, args.url, viewport, startQuestion)
+    await printer(args.username, args.password, args.url, args.output, viewport, startQuestion)
 }
 
 init()

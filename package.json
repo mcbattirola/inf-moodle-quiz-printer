@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "puppeteer": "^10.4.0"
+    "join-images": "^1.0.0",
+    "puppeteer": "^10.4.0",
+    "sharp": "^0.29.2"
   }
 }
