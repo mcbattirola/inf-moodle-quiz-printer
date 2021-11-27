@@ -52,9 +52,9 @@ Don't forget to use `"` on url if needed.
 
 [] Add option to select the final question to be printed
 
-[] Combine all images into one
+[x] Combine all images into one
 
-[] Print only quiz area, without sidebar, header and footer
+[x] Print only quiz area, without sidebar, header and footer
 
 [] Output format as optional param
 
